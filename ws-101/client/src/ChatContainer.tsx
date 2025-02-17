@@ -4,29 +4,11 @@ import { Send, Menu, MoreVertical } from "lucide-react";
 const ChatContainer = () => {
   const [message, setMessage] = useState("");
 
-  const demoMessages = [
-    {
-      id: 1,
-      text: "Hello! How are you?",
-      sender: "other",
-      timestamp: "09:41 AM",
-      avatar: "/api/placeholder/32/32",
-    },
-    {
-      id: 2,
-      text: "I'm doing great! Just finished working on a new project. How about you?",
-      sender: "me",
-      timestamp: "09:42 AM",
-      avatar: "/api/placeholder/32/32",
-    },
-    {
-      id: 3,
-      text: "That sounds interesting! What kind of project were you working on?",
-      sender: "other",
-      timestamp: "09:43 AM",
-      avatar: "/api/placeholder/32/32",
-    },
-  ];
+  const connection = new WebSocket("ws://localhost:3000");
+
+  connection.onopen = () => {
+    connection.send("connecting from the client");
+  };
 
   return (
     <div className="flex flex-col h-screen bg-gray-50">
@@ -38,11 +20,6 @@ const ChatContainer = () => {
               <Menu size={20} className="text-gray-600" />
             </button>
             <div className="flex items-center gap-3">
-              {/* <img
-                src=""
-                alt="Chat Avatar"
-                className="w-10 h-10 rounded-full object-cover"
-              /> */}
               <div>
                 <h1 className="font-semibold text-gray-800">Team Chat</h1>
                 <p className="text-sm text-gray-500">3 members • Active now</p>
@@ -57,47 +34,7 @@ const ChatContainer = () => {
 
       {/* Messages Container */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4 max-w-4xl mx-auto w-full">
-        {demoMessages.map((msg) => (
-          <div
-            key={msg.id}
-            className={`flex gap-3 ${
-              msg.sender === "me" ? "justify-end" : "justify-start"
-            }`}
-          >
-            {msg.sender !== "me" && (
-              <img
-                src={msg.avatar}
-                alt="User avatar"
-                className="w-8 h-8 rounded-full self-end"
-              />
-            )}
-            <div
-              className={`flex flex-col ${
-                msg.sender === "me" ? "items-end" : "items-start"
-              }`}
-            >
-              <div
-                className={`p-3 rounded-2xl max-w-md ${
-                  msg.sender === "me"
-                    ? "bg-blue-600 text-white rounded-br-sm"
-                    : "bg-white text-gray-800 rounded-bl-sm shadow-sm border"
-                }`}
-              >
-                {msg.text}
-              </div>
-              <span className="text-xs text-gray-500 mt-1">
-                {msg.timestamp}
-              </span>
-            </div>
-            {msg.sender === "me" && (
-              <img
-                src={msg.avatar}
-                alt="User avatar"
-                className="w-8 h-8 rounded-full self-end"
-              />
-            )}
-          </div>
-        ))}
+        {/* Messages will be displayed here */}
       </div>
 
       {/* Input Box */}
