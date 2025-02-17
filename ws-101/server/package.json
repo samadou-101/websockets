@@ -19,6 +19,7 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
+    "@types/ws": "^8.5.14",
     "ws": "^8.18.0"
   }
 }

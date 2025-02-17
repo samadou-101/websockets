@@ -7,9 +7,12 @@ const ChatContainer = () => {
   const connection = new WebSocket("ws://localhost:3000");
 
   connection.onopen = () => {
-    connection.send("connecting from the client");
+    connection.send("The client is talking");
   };
-
+  connection.onmessage = (event) => {
+    setMessage(event.data);
+    console.log("Received from server:", event.data);
+  };
   return (
     <div className="flex flex-col h-screen bg-gray-50">
       {/* Header */}
@@ -35,8 +38,8 @@ const ChatContainer = () => {
       {/* Messages Container */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4 max-w-4xl mx-auto w-full">
         {/* Messages will be displayed here */}
+        <div>{message}</div>
       </div>
-
       {/* Input Box */}
       <div className="border-t bg-white p-4">
         <div className="max-w-4xl mx-auto flex items-center gap-3">
