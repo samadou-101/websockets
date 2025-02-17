@@ -11,6 +11,10 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.4",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "ws-101": "file:"
   }
 }
